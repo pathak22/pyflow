@@ -1,9 +1,11 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #include "OpticalFlow.h"
 #include "ImageProcessing.h"
 #include "GaussianPyramid.h"
 #include <cstdlib>
 #include <iostream>
-
 
 using namespace std;
 

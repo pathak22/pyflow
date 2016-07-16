@@ -1,3 +1,6 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #include "Stochastic.h"
 #include "time.h"
 #include "stdlib.h"

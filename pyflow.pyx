@@ -6,6 +6,7 @@ from __future__ import print_function
 # from __future__ import unicode_literals
 import numpy as np
 cimport numpy as np
+# Author: Deepak Pathak (c) 2016
 
 cdef extern from "src/Coarse2FineFlowWrapper.h":
     void Coarse2FineFlowWrapper(double * vx, double * vy, double * warpI2,

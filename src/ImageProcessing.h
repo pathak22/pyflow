@@ -1,3 +1,6 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #ifndef _ImageProcessing_h
 #define _ImageProcessing_h
 
@@ -9,7 +12,7 @@
 //----------------------------------------------------------------------------------
 // class to handle basic image processing functions
 // this is a collection of template functions. These template functions are
-// used in other image classes such as BiImage, IntImage and FImage 
+// used in other image classes such as BiImage, IntImage and FImage
 //----------------------------------------------------------------------------------
 
 class ImageProcessing
@@ -25,14 +28,14 @@ public:
 	//---------------------------------------------------------------------------------
 	// function to interpolate the image plane
 	//---------------------------------------------------------------------------------
-	template <class T1,class T2> 
+	template <class T1,class T2>
 	static inline void BilinearInterpolate(const T1* pImage,int width,int height,int nChannels,double x,double y,T2* result);
 
 	template <class T1>
 	static inline T1 BilinearInterpolate(const T1* pImage,int width,int height,double x,double y);
 
 	// the transpose of bilinear interpolation
-	template <class T1,class T2> 
+	template <class T1,class T2>
 	static inline void BilinearInterpolate_transpose(const T1* pImage,int width,int height,int nChannels,double x,double y,T2* result);
 
 	template <class T1>
@@ -76,7 +79,7 @@ public:
 	//---------------------------------------------------------------------------------
 	template <class T1,class T2>
 	static void getPatch(const T1* pSrcImgae,T2* pPatch,int width,int height,int nChannels,double x,double y,int wsize);
-	
+
 	//---------------------------------------------------------------------------------
 	// function to warp image
 	//---------------------------------------------------------------------------------
@@ -110,7 +113,7 @@ public:
 	//---------------------------------------------------------------------------------
 
 	//---------------------------------------------------------------------------------
-	// function to generate a 2D Gaussian 
+	// function to generate a 2D Gaussian
 	//---------------------------------------------------------------------------------
 	template <class T>
 	static void generate2DGaussian(T*& pImage,int wsize,double sigma=-1);
@@ -196,7 +199,7 @@ inline void ImageProcessing::BilinearInterpolate_transpose(const T1* pInput,int 
 
 //------------------------------------------------------------------------------------------------------------
 // this is the most general function for reszing an image with a varying nChannels
-// bilinear interpolation is used for now. It might be replaced by other (bicubic) interpolation methods 
+// bilinear interpolation is used for now. It might be replaced by other (bicubic) interpolation methods
 //------------------------------------------------------------------------------------------------------------
 template <class T1,class T2>
 void ImageProcessing::ResizeImage(const T1* pSrcImage,T2* pDstImage,int SrcWidth,int SrcHeight,int nChannels,double Ratio)
@@ -205,7 +208,7 @@ void ImageProcessing::ResizeImage(const T1* pSrcImage,T2* pDstImage,int SrcWidth
 	DstWidth=(double)SrcWidth*Ratio;
 	DstHeight=(double)SrcHeight*Ratio;
 	memset(pDstImage,0,sizeof(T2)*DstWidth*DstHeight*nChannels);
-	
+
 	double x,y;
 
 	for(int i=0;i<DstHeight;i++)

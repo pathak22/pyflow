@@ -1,3 +1,6 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #ifndef _GaussianPyramid_h
 #define _GaussianPyramid_h
 

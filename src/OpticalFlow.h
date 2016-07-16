@@ -1,3 +1,6 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #pragma once
 
 #include "Image.h"
@@ -32,7 +35,7 @@ public:
 	static void genInImageMask(DImage& mask,const DImage& flow,int interval =0 );
 	static void SmoothFlowPDE(const DImage& Im1,const DImage& Im2, DImage& warpIm2,DImage& vx,DImage& vy,
 														 double alpha,int nOuterFPIterations,int nInnerFPIterations,int nCGIterations);
-	
+
 	static void SmoothFlowSOR(const DImage& Im1,const DImage& Im2, DImage& warpIm2, DImage& vx, DImage& vy,
 														 double alpha,int nOuterFPIterations,int nInnerFPIterations,int nSORIterations);
 

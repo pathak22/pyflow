@@ -1,3 +1,6 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #ifndef STOCHASTIC_H
 #define STOCHASTIC_H
 
@@ -177,7 +180,7 @@ void CStochastic::ComputeMeanCovariance(int Dim,int NumData,T1* pData,T2* pMean,
 	int i,j,k;
 	memset(pMean,0,sizeof(T2)*Dim);
 	memset(pCovariance,0,sizeof(T2)*Dim*Dim);
-	
+
 	bool IsWeightLoaded=false;
 	double Sum;
 	if(pWeight!=NULL)
@@ -290,7 +293,7 @@ void CStochastic::KMeanClustering(int Dim,int NumData,int NumClusters,T1* pData,
 	pCenters=new double*[NumClusters];
 	for(i=0;i<NumClusters;i++)
 		pCenters[i]=new double[Dim];
-	
+
 	// generate randome guess of the partition
 _CStochastic_KMeanClustering_InitializePartition:
 	for(i=0;i<NumClusters;i++)

@@ -1,3 +1,6 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #pragma once
 
 #include "stdio.h"
@@ -69,12 +72,12 @@ public:
 	}
 	// operators
 	Matrix& operator=(const Matrix<T>& matrix);
-	
+
 	Matrix& operator+=(double val);
 	Matrix& operator-=(double val);
 	Matrix& operator*=(double val);
 	Matrix& operator/=(double val);
-	
+
 	Matrix& operator+=(const Matrix<T>& matrix);
 	Matrix& operator-=(const Matrix<T>& matrix);
 	Matrix& operator*=(const Matrix<T>& matrix);
@@ -83,11 +86,11 @@ public:
 	friend Vector<T> operator*(const Matrix<T>& matrix,const Vector<T>& vect);
 	friend Matrix<T> operator*(const Matrix<T>& matrix1,const Matrix<T>& matrix2);
 
-	
+
 	// solve linear systems
 	void SolveLinearSystem(Vector<T>& result,const Vector<T>& b) const;
 	void ConjugateGradient(Vector<T>& result,const Vector<T>& b) const;
-	
+
 #ifdef _QT
 	bool writeMatrix(QFile& file) const;
 	bool readMatrix(QFile& file);

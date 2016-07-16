@@ -1,3 +1,5 @@
+# Author: Deepak Pathak (c) 2016
+
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -30,11 +32,11 @@ nSORIterations = 30
 
 s = time.time()
 u, v, im2W = pyflow.coarse2fine_flow(
-                im1, im2, alpha, ratio, minWidth, nOuterFPIterations, nInnerFPIterations,
-                nSORIterations)
+    im1, im2, alpha, ratio, minWidth, nOuterFPIterations, nInnerFPIterations,
+    nSORIterations)
 e = time.time()
 print('Time Taken: %.2f seconds for image of size (%d, %d, %d)' % (e - s,
-    im1.shape[0], im1.shape[1], im1.shape[2]))
+        im1.shape[0], im1.shape[1], im1.shape[2]))
 flow = np.concatenate((u[..., None], v[..., None]), axis=2)
 np.save('examples/outFlow.npy', flow)
 

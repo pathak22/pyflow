@@ -1,3 +1,6 @@
+// Author: Ce Liu (c) Dec, 2009; celiu@mit.edu
+// Modified By: Deepak Pathak (c) 2016; pathak@berkeley.edu
+
 #pragma once
 
 #include "stdio.h"
@@ -48,7 +51,7 @@ public:
 	//		result.pData[i] = pData[i]/val;
 	//	return result;
 	//}
-	
+
 	Vector<T>& operator+=(const Vector<T>& vect);
 	Vector<T>& operator*=(const Vector<T>& vect);
 	Vector<T>& operator-=(const Vector<T>& vect);
@@ -58,7 +61,7 @@ public:
 	Vector<T>& operator*=(double val);
 	Vector<T>& operator-=(double val);
 	Vector<T>& operator/=(double val);
-	
+
 	//friend const Vector<T> operator+(const Vector<T>& vect1,const Vector<T>& vect2);
 	//friend const Vector<T> operator*(const Vector<T>& vect1,const Vector<T>& vect2);
 	//friend const Vector<T> operator-(const Vector<T>& vect1,const Vector<T>& vect2);
@@ -68,7 +71,7 @@ public:
 	//friend const Vector<T> operator*(const Vector<T>& vect1,double val);
 	//friend const Vector<T> operator-(const Vector<T>& vect1,double val);
 	//friend Vector<T> operator/(const Vector<T>& vect,double val);
-	
+
 	friend double innerproduct(const Vector<T>& vect1,const Vector<T>& vect2)
 	{
 		double result = 0;
@@ -76,7 +79,7 @@ public:
 			result += vect1[i]*vect2[i];
 		return result;
 	}
-	
+
 	void concatenate(const vector< Vector<T> >& vect);
 
 	//friend const Vector<T> concatenate(const vector<Vector<T>>& vect){Vector<T> result; result.concatenate(vect); return result;};
