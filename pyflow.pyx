@@ -21,12 +21,13 @@ def coarse2fine_flow(np.ndarray[double, ndim=3, mode="c"] Im1 not None,
                         int nOuterFPIterations=3, int nInnerFPIterations=1,
                         int nSORIterations=20):
     """
-    Format:
+    Input Format:
       float * vx, float * vy, float * warpI2,
       const float * Im1, const float * Im2,
       double alpha (1), double ratio (0.5), int minWidth (40),
       int nOuterFPIterations (3), int nInnerFPIterations (1),
       int nSORIterations (20)
+    Images Format: (h,w,c): float64: [0,1]
     """
     cdef int h = Im1.shape[0]
     cdef int w = Im1.shape[1]
