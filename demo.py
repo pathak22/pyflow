@@ -35,14 +35,13 @@ u, v, im2W = pyflow.coarse2fine_flow(
     im1, im2, alpha, ratio, minWidth, nOuterFPIterations, nInnerFPIterations,
     nSORIterations)
 e = time.time()
-print('Time Taken: %.2f seconds for image of size (%d, %d, %d)' % (e - s,
-        im1.shape[0], im1.shape[1], im1.shape[2]))
+print('Time Taken: %.2f seconds for image of size (%d, %d, %d)' % (
+    e - s, im1.shape[0], im1.shape[1], im1.shape[2]))
 flow = np.concatenate((u[..., None], v[..., None]), axis=2)
 np.save('examples/outFlow.npy', flow)
 
 if args.viz:
     import cv2
-    import matplotlib.pyplot as plt
     hsv = np.zeros(im1.shape, dtype=np.uint8)
     hsv[:, :, 0] = 255
     hsv[:, :, 1] = 255
@@ -50,5 +49,5 @@ if args.viz:
     hsv[..., 0] = ang * 180 / np.pi / 2
     hsv[..., 2] = cv2.normalize(mag, None, 0, 255, cv2.NORM_MINMAX)
     rgb = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-    cv2.imwrite('examples/outFlow.png', rgb)
-    cv2.imwrite('examples/car2Warped.jpg', im2W[:, :, ::-1]*255)
+    cv2.imwrite('examples/outFlow_new.png', rgb)
+    cv2.imwrite('examples/car2Warped_new.jpg', im2W[:, :, ::-1] * 255)
