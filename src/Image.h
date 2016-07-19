@@ -86,6 +86,14 @@ public:
 	inline int nelements() const {return nElements;};
 	inline bool isDerivativeImage() const {return IsDerivativeImage;};
 	inline color_type colortype() const{return colorType;};
+  void setColorType(int colorVal) {
+    switch (colorVal) {
+      case 1: colorType = BGR; break;
+      case 2: colorType = GRAY; break;
+      default: colorType = RGB;
+    }
+    return;
+  }
 
 	bool IsFloat () const;
 	bool IsEmpty() const {if(nElements==0) return true;else return false;};
@@ -1190,7 +1198,7 @@ void Image<T>::GaussianSmoothing(Image<T1>& image,double sigma,int fsize) const
 	// apply filtering
 	imfilter_hv(image,gFilter,fsize,gFilter,fsize);
 
-	delete gFilter;
+	delete[] gFilter;
 }
 
 //------------------------------------------------------------------------------------------
@@ -1217,7 +1225,7 @@ void Image<T>::GaussianSmoothing_transpose(Image<T1>& image,double sigma,int fsi
 	// apply filtering
 	imfilter_hv_transpose(image,gFilter,fsize,gFilter,fsize);
 
-	delete gFilter;
+	delete[] gFilter;
 }
 
 
@@ -1321,7 +1329,7 @@ void Image<T>::imfilter_hv(Image<T1> &image, const double *hfilter, int hfsize, 
 	pTempBuffer=new T1[nElements];
 	ImageProcessing::hfiltering(pData,pTempBuffer,imWidth,imHeight,nChannels,hfilter,hfsize);
 	ImageProcessing::vfiltering(pTempBuffer,image.data(),imWidth,imHeight,nChannels,vfilter,vfsize);
-    delete pTempBuffer;
+    delete[] pTempBuffer;
 }
 
 template <class T>
@@ -2047,8 +2055,8 @@ void Image<T>::BilateralFiltering(Image<T1>& other,int fsize,double filter_sigma
 				result.data()[(i*imWidth+j)*other.nchannels()]=pBuffer[k]/totalWeight;
 		}
 	other.copyData(result);
-	delete pBuffer;
-	delete pSpatialWeight;
+	delete[] pBuffer;
+	delete[] pSpatialWeight;
 }
 
 
@@ -2105,8 +2113,8 @@ void  Image<T>::imBilateralFiltering(Image<T>& result,int fsize,double filter_si
 				result.data()[offset0+k]=pBuffer[k]/totalWeight;
 
 		}
-	delete pBuffer;
-	delete pSpatialWeight;
+	delete[] pBuffer;
+	delete[] pSpatialWeight;
 	//return result;
 }
 

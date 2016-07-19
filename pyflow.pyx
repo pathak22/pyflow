@@ -13,20 +13,22 @@ cdef extern from "src/Coarse2FineFlowWrapper.h":
                                   const double * Im1, const double * Im2,
                                   double alpha, double ratio, int minWidth,
                                   int nOuterFPIterations, int nInnerFPIterations,
-                                  int nSORIterations, int h, int w, int c);
+                                  int nSORIterations, int colType,
+                                  int h, int w, int c);
 
 def coarse2fine_flow(np.ndarray[double, ndim=3, mode="c"] Im1 not None,
                         np.ndarray[double, ndim=3, mode="c"] Im2 not None,
                         double alpha=1, double ratio=0.5, int minWidth=40,
                         int nOuterFPIterations=3, int nInnerFPIterations=1,
-                        int nSORIterations=20):
+                        int nSORIterations=20, int colType=0):
     """
     Input Format:
-      float * vx, float * vy, float * warpI2,
-      const float * Im1, const float * Im2,
+      double * vx, double * vy, double * warpI2,
+      const double * Im1, const double * Im2,
       double alpha (1), double ratio (0.5), int minWidth (40),
       int nOuterFPIterations (3), int nInnerFPIterations (1),
-      int nSORIterations (20)
+      int nSORIterations (20),
+      int colType (0 or default:RGB, 1:BGR, 2:GRAY)
     Images Format: (h,w,c): float64: [0,1]
     """
     cdef int h = Im1.shape[0]
@@ -44,6 +46,6 @@ def coarse2fine_flow(np.ndarray[double, ndim=3, mode="c"] Im1 not None,
     Coarse2FineFlowWrapper(&vx[0, 0], &vy[0, 0], &warpI2[0, 0, 0],
                             &Im1[0, 0, 0], &Im2[0, 0, 0],
                             alpha, ratio, minWidth, nOuterFPIterations,
-                            nInnerFPIterations, nSORIterations,
+                            nInnerFPIterations, nSORIterations, colType,
                             h, w, c)
     return vx, vy, warpI2

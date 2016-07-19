@@ -1201,4 +1201,5 @@ bool OpticalFlow::showFlow(const DImage& flow,const char* filename)
 		foo[i] = (flow[i]-Min)/(Max-Min)*255;
   // opencv support disabled. Can no longer write images.
 	// foo.imwrite(filename);
+  return false;
 }

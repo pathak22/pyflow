@@ -156,7 +156,7 @@ template <class T>
 void Vector<T>::releaseData()
 {
 	if(pData!=NULL)
-		delete pData;
+		delete[] pData;
 	pData=NULL;
 	nDim=0;
 }
@@ -437,7 +437,7 @@ template <class T>
 void Vector<T>::readVector(const mxArray* prhs)
 {
 	if(pData!=NULL)
-		delete pData;
+		delete[] pData;
 	int nElements = mxGetNumberOfDimensions(prhs);
 	if(nElements>2)
 		mexErrMsgTxt("A vector is expected to be loaded!");

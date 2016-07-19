@@ -12,7 +12,8 @@ void Coarse2FineFlowWrapper(double * vx, double * vy, double * warpI2,
                               const double * Im1, const double * Im2,
                               double alpha, double ratio, int minWidth,
                               int nOuterFPIterations, int nInnerFPIterations,
-                              int nSORIterations, int h, int w, int c) {
+                              int nSORIterations, int colType,
+                              int h, int w, int c) {
   DImage ImFormatted1, ImFormatted2;
   DImage vxFormatted, vyFormatted, warpI2Formatted;
 
@@ -21,6 +22,8 @@ void Coarse2FineFlowWrapper(double * vx, double * vy, double * warpI2,
   ImFormatted2.allocate(w, h, c);
   memcpy(ImFormatted1.pData, Im1, h * w * c * sizeof(double));
   memcpy(ImFormatted2.pData, Im2, h * w * c * sizeof(double));
+  ImFormatted1.setColorType(colType);
+  ImFormatted2.setColorType(colType);
 
   // call optical flow backend
   OpticalFlow::Coarse2FineFlow(vxFormatted, vyFormatted, warpI2Formatted,
@@ -33,6 +36,13 @@ void Coarse2FineFlowWrapper(double * vx, double * vy, double * warpI2,
   memcpy(vx, vxFormatted.pData, h * w * sizeof(double));
   memcpy(vy, vyFormatted.pData, h * w * sizeof(double));
   memcpy(warpI2, warpI2Formatted.pData, h * w * c * sizeof(double));
+
+  // clear c memory
+  ImFormatted1.clear();
+  ImFormatted2.clear();
+  vxFormatted.clear();
+  vyFormatted.clear();
+  warpI2Formatted.clear();
 
   return;
 }

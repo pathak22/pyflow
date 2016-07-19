@@ -29,11 +29,12 @@ minWidth = 20
 nOuterFPIterations = 7
 nInnerFPIterations = 1
 nSORIterations = 30
+colType = 0  # 0 or default:RGB, 1:BGR, 2:GRAY
 
 s = time.time()
 u, v, im2W = pyflow.coarse2fine_flow(
     im1, im2, alpha, ratio, minWidth, nOuterFPIterations, nInnerFPIterations,
-    nSORIterations)
+    nSORIterations, colType)
 e = time.time()
 print('Time Taken: %.2f seconds for image of size (%d, %d, %d)' % (
     e - s, im1.shape[0], im1.shape[1], im1.shape[2]))
