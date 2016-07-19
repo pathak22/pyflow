@@ -28,7 +28,7 @@ def coarse2fine_flow(np.ndarray[double, ndim=3, mode="c"] Im1 not None,
       double alpha (1), double ratio (0.5), int minWidth (40),
       int nOuterFPIterations (3), int nInnerFPIterations (1),
       int nSORIterations (20),
-      int colType (0 or default:RGB, 1:BGR, 2:GRAY)
+      int colType (0 or default:RGB, 1:GRAY)
     Images Format: (h,w,c): float64: [0,1]
     """
     cdef int h = Im1.shape[0]

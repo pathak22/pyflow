@@ -86,14 +86,13 @@ public:
 	inline int nelements() const {return nElements;};
 	inline bool isDerivativeImage() const {return IsDerivativeImage;};
 	inline color_type colortype() const{return colorType;};
-  void setColorType(int colorVal) {
-    switch (colorVal) {
-      case 1: colorType = BGR; break;
-      case 2: colorType = GRAY; break;
-      default: colorType = RGB;
-    }
-    return;
-  }
+	void setColorType(int colorVal) {
+	switch (colorVal) {
+	  case 1: colorType = GRAY; break;
+	  default: colorType = RGB;
+	}
+	return;
+	}
 
 	bool IsFloat () const;
 	bool IsEmpty() const {if(nElements==0) return true;else return false;};
@@ -468,6 +467,7 @@ Image<T>::Image()
 {
 	pData=NULL;
 	imWidth=imHeight=nChannels=nPixels=nElements=0;
+	colorType=RGB;
 	IsDerivativeImage=false;
 }
 

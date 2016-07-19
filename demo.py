@@ -29,7 +29,7 @@ minWidth = 20
 nOuterFPIterations = 7
 nInnerFPIterations = 1
 nSORIterations = 30
-colType = 0  # 0 or default:RGB, 1:BGR, 2:GRAY
+colType = 0  # 0 or default:RGB, 1:GRAY (but pass gray image with shape (h,w,1))
 
 s = time.time()
 u, v, im2W = pyflow.coarse2fine_flow(
