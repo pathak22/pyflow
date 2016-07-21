@@ -24,7 +24,7 @@ def coarse2fine_flow(np.ndarray[double, ndim=3, mode="c"] Im1 not None,
     """
     Input Format:
       double * vx, double * vy, double * warpI2,
-      const double * Im1, const double * Im2,
+      const double * Im1 (range [0,1]), const double * Im2 (range [0,1]),
       double alpha (1), double ratio (0.5), int minWidth (40),
       int nOuterFPIterations (3), int nInnerFPIterations (1),
       int nSORIterations (20),
