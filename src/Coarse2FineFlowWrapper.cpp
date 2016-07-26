@@ -4,6 +4,7 @@
 // simpler.
 // Author: Deepak Pathak (c) 2016
 
+#include "Coarse2FineFlowWrapper.h"
 #include "Image.h"
 #include "OpticalFlow.h"
 using namespace std;
