@@ -245,7 +245,7 @@ void CStochastic::ComputeVectorMean(int Dim,int NumData,T1* pData,T2* pMean,doub
 	memset(pMean,0,sizeof(T2)*Dim);
 	bool IsWeightLoaded;
 	double Sum;
-	if(pWeight=NULL)
+	if(pWeight==NULL)
 		IsWeightLoaded=false;
 	else
 		IsWeightLoaded=true;
