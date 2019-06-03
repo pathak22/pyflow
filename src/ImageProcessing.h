@@ -249,19 +249,17 @@ template <class T1,class T2>
 void ImageProcessing::hfiltering(const T1* pSrcImage,T2* pDstImage,int width,int height,int nChannels,const double* pfilter1D,int fsize)
 {
 	memset(pDstImage,0,sizeof(T2)*width*height*nChannels);
-	T2* pBuffer;
-	double w;
-	int i,j,l,k,offset,jj;
-	for(i=0;i<height;i++)
-		for(j=0;j<width;j++)
+#pragma omp parallel for
+	for(int i=0;i<height;i++)
+		for(int j=0;j<width;j++)
 		{
-			offset=i*width*nChannels;
-			pBuffer=pDstImage+offset+j*nChannels;
-			for(l=-fsize;l<=fsize;l++)
+			int offset=i*width*nChannels;
+			T2* pBuffer=pDstImage+offset+j*nChannels;
+			for(int l=-fsize;l<=fsize;l++)
 			{
-				w=pfilter1D[l+fsize];
-				jj=EnforceRange(j+l,width);
-				for(k=0;k<nChannels;k++)
+				double w=pfilter1D[l+fsize];
+				int jj=EnforceRange(j+l,width);
+				for(int k=0;k<nChannels;k++)
 					pBuffer[k]+=pSrcImage[offset+jj*nChannels+k]*w;
 			}
 		}
@@ -274,20 +272,18 @@ template <class T1,class T2>
 void ImageProcessing::hfiltering_transpose(const T1* pSrcImage,T2* pDstImage,int width,int height,int nChannels,const double* pfilter1D,int fsize)
 {
 	memset(pDstImage,0,sizeof(T2)*width*height*nChannels);
-	const T1* pBuffer;
-	double w;
-	int i,j,l,k,offset,jj;
-	for(i=0;i<height;i++)
-		for(j=0;j<width;j++)
+#pragma omp parallel for
+	for(int i=0;i<height;i++)
+		for(int j=0;j<width;j++)
 		{
 			int offset0=i*width*nChannels;
-			pBuffer=pSrcImage+(i*width+j)*nChannels;
-			for(l=-fsize;l<=fsize;l++)
+			const T1* pBuffer=pSrcImage+(i*width+j)*nChannels;
+			for(int l=-fsize;l<=fsize;l++)
 			{
-				w=pfilter1D[l+fsize];
-				jj=EnforceRange(j+l,width);
-				offset = offset0 + jj*nChannels;
-				for(k=0;k<nChannels;k++)
+				double w=pfilter1D[l+fsize];
+				int jj=EnforceRange(j+l,width);
+				int offset = offset0 + jj*nChannels;
+				for(int k=0;k<nChannels;k++)
 					pDstImage[offset+k] += pBuffer[k]*w;
 			}
 		}
@@ -339,18 +335,16 @@ template <class T1,class T2>
 void ImageProcessing::vfiltering(const T1* pSrcImage,T2* pDstImage,int width,int height,int nChannels,const double* pfilter1D,int fsize)
 {
 	memset(pDstImage,0,sizeof(T2)*width*height*nChannels);
-	T2* pBuffer;
-	double w;
-	int i,j,l,k,offset,ii;
-	for(i=0;i<height;i++)
-		for(j=0;j<width;j++)
+#pragma omp parallel for
+	for(int i=0;i<height;i++)
+		for(int j=0;j<width;j++)
 		{
-			pBuffer=pDstImage+(i*width+j)*nChannels;
-			for(l=-fsize;l<=fsize;l++)
+			T2* pBuffer=pDstImage+(i*width+j)*nChannels;
+			for(int l=-fsize;l<=fsize;l++)
 			{
-				w=pfilter1D[l+fsize];
-				ii=EnforceRange(i+l,height);
-				for(k=0;k<nChannels;k++)
+				double w=pfilter1D[l+fsize];
+				int ii=EnforceRange(i+l,height);
+				for(int k=0;k<nChannels;k++)
 					pBuffer[k]+=pSrcImage[(ii*width+j)*nChannels+k]*w;
 			}
 		}
@@ -363,19 +357,17 @@ template <class T1,class T2>
 void ImageProcessing::vfiltering_transpose(const T1* pSrcImage,T2* pDstImage,int width,int height,int nChannels,const double* pfilter1D,int fsize)
 {
 	memset(pDstImage,0,sizeof(T2)*width*height*nChannels);
-	const T1* pBuffer;
-	double w;
-	int i,j,l,k,offset,ii;
-	for(i=0;i<height;i++)
-		for(j=0;j<width;j++)
+#pragma omp parallel for
+	for(int i=0;i<height;i++)
+		for(int j=0;j<width;j++)
 		{
-			pBuffer=pSrcImage+(i*width+j)*nChannels;
-			for(l=-fsize;l<=fsize;l++)
+			const T1* pBuffer=pSrcImage+(i*width+j)*nChannels;
+			for(int l=-fsize;l<=fsize;l++)
 			{
-				w=pfilter1D[l+fsize];
-				ii=EnforceRange(i+l,height);
-				offset = (ii*width+j)*nChannels;
-				for(k=0;k<nChannels;k++)
+				double w=pfilter1D[l+fsize];
+				int ii=EnforceRange(i+l,height);
+				int offset = (ii*width+j)*nChannels;
+				for(int k=0;k<nChannels;k++)
 					//pBuffer[k]+=pSrcImage[(ii*width+j)*nChannels+k]*w;
 					pDstImage[offset+k] += pBuffer[k]*w;
 			}
